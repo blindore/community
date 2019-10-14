@@ -1,0 +1,1 @@
+alter table USER alter column id integer;
