@@ -22,3 +22,5 @@ CREATE CACHED TABLE PUBLIC.USER(
 )
 
 2019-10-14项目重置
+mvn flyway:migrate
+mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate

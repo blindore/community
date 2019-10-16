@@ -1,5 +1,6 @@
 package life.majiang.community.dto;
 
+import life.majiang.community.mapper.QuestionMapper;
 import life.majiang.community.model.User;
 import lombok.Data;
 
@@ -20,4 +21,6 @@ public class QuestionDTO {
     private Integer viewCount;
     private Integer likeCount;
     private User user;
+
+
 }
