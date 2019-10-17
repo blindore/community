@@ -1,8 +1,8 @@
 package life.majiang.community.controller;
 
-import life.majiang.community.dto.CommenCreatetDTO;
 import life.majiang.community.dto.CommentDTO;
 import life.majiang.community.dto.QuestionDTO;
+import life.majiang.community.enums.CommentTypeEnum;
 import life.majiang.community.service.CommentService;
 import life.majiang.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class QuestionController {
     public String question(@PathVariable(name = "id") Integer id,
                            Model model){
        QuestionDTO questionDTO = questionService.getById(id);
-       List<CommentDTO> comments = commentService.listByQuestionId(id);
+       List<CommentDTO> comments = commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
        questionService.incView(id);//增加阅读功能
        model.addAttribute("question", questionDTO) ;
        model.addAttribute("comments", comments) ;
