@@ -1,12 +1,12 @@
 package life.majiang.community.controller;
 
-import life.majiang.community.dto.CommentDTO;
+import life.majiang.community.dto.CommenCreatetDTO;
 import life.majiang.community.dto.ResultDTO;
 import life.majiang.community.exception.CustomizeErrorCode;
-import life.majiang.community.mapper.CommentMapper;
 import life.majiang.community.model.Comment;
 import life.majiang.community.model.User;
 import life.majiang.community.service.CommentService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author:吴玉魁
@@ -28,19 +26,21 @@ public class CommentController {
     private CommentService commentService;
     @ResponseBody
     @RequestMapping(value = "/comment",method = RequestMethod.POST)
-    public Object post(@RequestBody CommentDTO commentDTO,
+    public Object post(@RequestBody CommenCreatetDTO commenCreatetDTO,
                         HttpServletRequest request){
         User user = (User)request.getSession().getAttribute("user");
         if (user ==null){
             return ResultDTO.errorOf(CustomizeErrorCode.NO_LOGIN);
         }
 
+    if (commenCreatetDTO ==null || StringUtils.isBlank(commenCreatetDTO.getContent())) {
+            return ResultDTO.errorOf(CustomizeErrorCode.CONTENT_IS_EMPTY);
+        }
+
         Comment comment = new Comment();
-
-
-        comment.setParentId(commentDTO.getParentId());
-        comment.setContent(commentDTO.getContent());
-        comment.setType(commentDTO.getType());
+        comment.setParentId(commenCreatetDTO.getParentId());
+        comment.setContent(commenCreatetDTO.getContent());
+        comment.setType(commenCreatetDTO.getType());
         comment.setGmtCreate(System.currentTimeMillis());
         comment.setGmtModified(System.currentTimeMillis());
         comment.setCommentator(user.getId());
