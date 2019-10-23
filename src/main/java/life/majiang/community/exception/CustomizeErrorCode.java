@@ -11,7 +11,9 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     SYS_ERROR(2004,"服务器瓦特了"),
     TYPE_PARAM_WRONG(2005,"评论类型错误或不存在!"),
     COMMENT_NOT_FOUND(2006,"评论不存在!"),
-    CONTENT_IS_EMPTY(2007,"评论不能为空!");
+    CONTENT_IS_EMPTY(2007,"评论不能为空!"),
+    READ_NOTIFICATION_FAIL(2008,"消息读取失败!"),
+    NOTIFICATION_NOT_FOUND(2009,"消息不见了!");
     @Override
     public Integer getCode() {
         return code;

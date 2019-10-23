@@ -4,6 +4,8 @@ import life.majiang.community.dto.CommenCreatetDTO;
 import life.majiang.community.dto.CommentDTO;
 import life.majiang.community.dto.ResultDTO;
 import life.majiang.community.enums.CommentTypeEnum;
+import life.majiang.community.enums.NotificationStatusEnum;
+import life.majiang.community.enums.NotificationTypeEnum;
 import life.majiang.community.exception.CustomizeErrorCode;
 import life.majiang.community.model.Comment;
 import life.majiang.community.model.User;
@@ -24,15 +26,16 @@ import java.util.List;
 public class CommentController {
     @Autowired
     private CommentService commentService;
+
     @ResponseBody
-    @RequestMapping(value = "/comment",method = RequestMethod.POST)
+    @RequestMapping(value = "/comment", method = RequestMethod.POST)
     public Object post(@RequestBody CommenCreatetDTO commenCreatetDTO,
-                        HttpServletRequest request){
-        User user = (User)request.getSession().getAttribute("user");
-        if (user ==null){
+                       HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
             return ResultDTO.errorOf(CustomizeErrorCode.NO_LOGIN);
         }
-    if (commenCreatetDTO ==null || StringUtils.isBlank(commenCreatetDTO.getContent())) {
+        if (commenCreatetDTO == null || StringUtils.isBlank(commenCreatetDTO.getContent())) {
             return ResultDTO.errorOf(CustomizeErrorCode.CONTENT_IS_EMPTY);
         }
         Comment comment = new Comment();
@@ -43,15 +46,15 @@ public class CommentController {
         comment.setGmtModified(System.currentTimeMillis());
         comment.setCommentator(user.getId());
         comment.setLikeCount(0);
-        commentService.insert(comment);
+        commentService.insert(comment, user);
         return ResultDTO.okOf();
     }
 
     @ResponseBody
-    @RequestMapping(value = "/comment/{id}",method = RequestMethod.GET)
-    public ResultDTO<List> comments(@PathVariable(name="id") Integer id){
+    @RequestMapping(value = "/comment/{id}", method = RequestMethod.GET)
+    public ResultDTO<List> comments(@PathVariable(name = "id") Integer id) {
         List<CommentDTO> commentDTOS = commentService.listByTargetId(id, CommentTypeEnum.COMMENT);
-        
+
         return ResultDTO.okOf(commentDTOS);
     }
 

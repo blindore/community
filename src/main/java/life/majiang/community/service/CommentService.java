@@ -2,22 +2,18 @@ package life.majiang.community.service;
 
 import life.majiang.community.dto.CommentDTO;
 import life.majiang.community.enums.CommentTypeEnum;
+import life.majiang.community.enums.NotificationStatusEnum;
+import life.majiang.community.enums.NotificationTypeEnum;
 import life.majiang.community.exception.CustomizeErrorCode;
 import life.majiang.community.exception.CustomizeException;
-import life.majiang.community.mapper.CommentMapper;
-import life.majiang.community.mapper.QuestionExtMapper;
-import life.majiang.community.mapper.QuestionMapper;
-import life.majiang.community.mapper.UserMapper;
+import life.majiang.community.mapper.*;
 import life.majiang.community.model.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -34,9 +30,13 @@ public class CommentService {
     private QuestionExtMapper questionExtMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private CommentExtMapper commentExtMapper;
+    @Autowired
+    private NotificationMapper notificationMapper;
 
     @Transactional
-    public void insert(Comment comment) {
+    public void insert(Comment comment, User commentator) {
         if (comment.getParentId() == null || comment.getParentId() == 0) {
             throw new CustomizeException(CustomizeErrorCode.TARGET_PARAM_NOT_FOUND);
         }
@@ -49,7 +49,20 @@ public class CommentService {
             if (dbComment == null) {
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUND);
             }
+            //回复问题
+            Question question = questionMapper.selectByPrimaryKey(dbComment.getParentId());
+            if (question == null) {
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
             commentMapper.insert(comment);
+
+//            增加评论数
+            Comment parentComment = new Comment();
+            parentComment.setId(comment.getParentId());
+            parentComment.setCommentCount(1);
+            commentExtMapper.incCommentCount(parentComment);
+            //创建通知
+            createNotify(comment,dbComment.getCommentator(), commentator.getName(), question.getTitle(), NotificationTypeEnum.REPLY_COMMENT,question.getId());
         } else {
             //回复问题
             Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
@@ -59,8 +72,25 @@ public class CommentService {
             commentMapper.insert(comment);
             question.setCommentCount(1);
             questionExtMapper.incCommentCount(question);
+
+            //创建通知
+            createNotify(comment,question.getCreator(), commentator.getName(), question.getTitle(), NotificationTypeEnum.REPLY_QUESTION,question.getId());
         }
 
+
+    }
+
+    private void createNotify(Comment comment, Integer receiver, String notifierName, String outerTitle, NotificationTypeEnum notificationType, Integer outerId) {
+        life.majiang.community.model.Notification notification = new life.majiang.community.model.Notification();
+        notification.setGmtCreate(System.currentTimeMillis());
+        notification.setType(notificationType.getType());
+        notification.setOuterId(outerId);
+        notification.setNotifier(comment.getCommentator());
+        notification.setStatus(NotificationStatusEnum.UNREAD.getStatus());
+        notification.setReceiver(receiver);
+        notification.setNotifierName(notifierName );
+        notification.setOuterTitle(outerTitle);
+        notificationMapper.insert(notification);
 
     }
 
@@ -91,4 +121,6 @@ public class CommentService {
         }).collect(Collectors.toList());
         return commentDTOS;
     }
+
+
 }

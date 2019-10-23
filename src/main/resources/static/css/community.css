@@ -40,6 +40,11 @@ body {
 .jumbotron {
     margin-left: 50px;
 }
+.comments {
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
 
 .menu {
     color: #999;
@@ -60,13 +65,32 @@ body {
     color: #46b8da !important;
 }
 
-.sub-comments{
+.sub-comments {
     border-radius: 5px;
     margin-top: 10px;
     border: 1px solid #eee;
     padding-top: 15px;
     margin-bottom: 15px;
 }
-.sub-comments .btn{
-    margin: 10px 0;
+.sub-comments .btn {
+     margin: 10px 0;
+ }
+.questionTag {
+    margin-right: 5px;
 }
+.question-related {
+    line-height: 20px;
+    font-size: 12px;
+    margin-left: 0;
+    list-style: none;
+    padding-left: 0;
+}
+.question-self {
+    width: 100%;
+}
+.publish-tag {
+    margin-right: 8px;
+}
+
+
+
