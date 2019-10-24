@@ -10,9 +10,9 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only" >码匠社区</span>
+                    <span class="sr-only" >Wyk个人主页</span>
                 </button>
-                <a class="navbar-brand" href="/">码匠社区</a>
+                <a class="navbar-brand" href="/">Wyk个人主页</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -42,7 +42,9 @@
                             <li><a href="/logout">退出登录</a></li>
                         </ul>
                     </li>
-                    <li th:if="${ session.user == null}"><a href="https://github.com/login/oauth/authorize?client_id=5974a373f3cef83eb7da&redirect_uri=http://localhost:8887/callback&scope=user&state=1">登录</a></li>
+                    <li th:if="${ session.user == null}">
+                        <a href="@{https://github.com/login/oauth/authorize(client_id='5974a373f3cef83eb7da', redirect_uri=${#httpServletRequest.getRequestURL()+'callback'},scope='user',state=1)}">登录</a></li>
+<!--                    <li th:if="${ session.user == null}"><a href="https://github.com/login/oauth/authorize?client_id=5974a373f3cef83eb7da&redirect_uri=http://localhost:8887/callback&scope=user&state=1">登录</a></li>-->
                 </ul>
             </div>
         </div>

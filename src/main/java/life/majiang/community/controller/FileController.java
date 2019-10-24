@@ -16,7 +16,7 @@ public class FileController {
     public FileDTO upload(){
         FileDTO fileDTO = new FileDTO();
         fileDTO.setSuccess(1);
-        fileDTO.setUrl("/images/个人照片.jpg" );
+        fileDTO.setUrl("/images/个人照片.gif" );
 
         return fileDTO;
     }
