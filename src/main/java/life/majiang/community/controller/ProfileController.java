@@ -37,10 +37,10 @@ public class ProfileController {
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) return "redirect:/";
         if ("questions".equals(action)) {
-            model.addAttribute("section", "questions");
-            model.addAttribute("sectionName", "我的发布");
             PaginationDTO paginationDTO = questionService.list(user.getId(), page, size);
             model.addAttribute("pagination", paginationDTO);
+            model.addAttribute("section", "questions");
+            model.addAttribute("sectionName", "我的发布");
 
         } else if ("replies".equals(action)) {
             PaginationDTO paginationDTO = notificationService.list(user.getId(), page, size);

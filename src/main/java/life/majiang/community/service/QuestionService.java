@@ -35,6 +35,14 @@ public class QuestionService {
     private QuestionMapper questionMapper;
     @Autowired
     private UserMapper userMapper;
+
+    /**index页面的list
+     *
+     * @param search
+     * @param page
+     * @param size
+     * @return
+     */
     public PaginationDTO list(String search, Integer page, Integer size) {
         //搜索功能
         if (StringUtils.isNotBlank(search)) {
@@ -69,11 +77,16 @@ public class QuestionService {
         }
 
         paginationDTO.setData(questionDTOList);
-
         return paginationDTO;
     }
 
-
+    /**profile页面的list
+     *
+     * @param userId
+     * @param page
+     * @param size
+     * @return
+     */
     public PaginationDTO list(Integer userId, Integer page, Integer size) {
         PaginationDTO paginationDTO = new PaginationDTO();
 
@@ -84,14 +97,12 @@ public class QuestionService {
         totalPage = (totalCount % size == 0) ?totalCount / size : totalCount / size + 1;
         if (page < 1)page = 1;
         if (page > totalPage) page = totalPage;
-        paginationDTO.setPagination(totalPage, size);
+        paginationDTO.setPagination(totalPage, page);
         Integer offset = size * (page - 1);
         QuestionExample example = new QuestionExample();
         example.createCriteria().andCreatorEqualTo(userId);
         List<Question> questions = questionMapper.selectByExampleWithRowbounds(example, new RowBounds(offset, size));
-
         List<QuestionDTO> questionDTOList = new ArrayList<>();
-
         for (Question question : questions) {
             User user = userMapper.selectByPrimaryKey(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();

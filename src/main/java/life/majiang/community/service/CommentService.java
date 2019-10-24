@@ -55,7 +55,6 @@ public class CommentService {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
             commentMapper.insert(comment);
-
 //            增加评论数
             Comment parentComment = new Comment();
             parentComment.setId(comment.getParentId());
@@ -73,29 +72,26 @@ public class CommentService {
             commentMapper.insert(comment);
             question.setCommentCount(1);
             questionExtMapper.incCommentCount(question);
-
             //创建通知
             createNotify(comment,question.getCreator(), commentator.getName(), question.getTitle(), NotificationTypeEnum.REPLY_QUESTION,question.getId());
         }
-
-
     }
-
     private void createNotify(Comment comment, Integer receiver, String notifierName, String outerTitle, NotificationTypeEnum notificationType, Integer outerId) {
         //自己评论自己的不发通知
         if (receiver == comment.getCommentator()) {
             return;
         }
-        life.majiang.community.model.Notification notification = new life.majiang.community.model.Notification();
-        notification.setGmtCreate(System.currentTimeMillis());
-        notification.setType(notificationType.getType());
-        notification.setOuterId(outerId);
-        notification.setNotifier(comment.getCommentator());
-        notification.setStatus(NotificationStatusEnum.UNREAD.getStatus());
-        notification.setReceiver(receiver);
-        notification.setNotifierName(notifierName );
-        notification.setOuterTitle(outerTitle);
-        notificationMapper.insert(notification);
+            Notification notification = new Notification();
+            notification.setGmtCreate(System.currentTimeMillis());
+            notification.setType(notificationType.getType());
+            notification.setOuterId(outerId);
+            notification.setNotifier(comment.getCommentator());
+            notification.setStatus(NotificationStatusEnum.UNREAD.getStatus());
+            notification.setReceiver(receiver);
+            notification.setNotifierName(notifierName);
+            notification.setOuterTitle(outerTitle);
+            notificationMapper.insert(notification);
+
 
     }
 
