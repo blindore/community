@@ -24,3 +24,15 @@ CREATE CACHED TABLE PUBLIC.USER(
 2019-10-14项目重置
 mvn flyway:migrate
 mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
+
+命令 
+更新源  apt-get update
+安装  sudo apt-get install git
+打开文件夹 pwd /root
+创建文件夹 mkdir App
+cd App
+git clone https://github.com/blindore/community.git
+apt install maven
+mvn compile package
+cp src/main/resources/application.properties src/main/resources/application-production.properties//
+vim src/main/resources/application-production.properties
