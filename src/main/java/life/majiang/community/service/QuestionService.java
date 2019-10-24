@@ -60,7 +60,7 @@ public class QuestionService {
         if (page < 1)page = 1;
         if (page > totalPage) page = totalPage;
         paginationDTO.setPagination(totalPage, page);
-        Integer offset = size * (page - 1);
+        Integer offset = totalPage < 1 ? 0 : size * (page - 1);
         QuestionExample example1 = new QuestionExample();
         example1.setOrderByClause("gmt_create desc");
         questionQueryDTO.setSize(size);
@@ -98,7 +98,7 @@ public class QuestionService {
         if (page < 1)page = 1;
         if (page > totalPage) page = totalPage;
         paginationDTO.setPagination(totalPage, page);
-        Integer offset = size * (page - 1);
+        Integer offset = totalPage < 1 ? 0 : size * (page - 1);
         QuestionExample example = new QuestionExample();
         example.createCriteria().andCreatorEqualTo(userId);
         List<Question> questions = questionMapper.selectByExampleWithRowbounds(example, new RowBounds(offset, size));

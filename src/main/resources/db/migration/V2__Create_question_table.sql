@@ -1,13 +1,13 @@
-create table QUESTION
+create table question
 (
-    ID            INTEGER auto_increment primary key,
-    TITLE         VARCHAR(50),
-    DESCRIPTION   CLOB,
-    GMT_CREATE    BIGINT,
-    GMT_MODIFIED  BIGINT,
-    CREATOR       INTEGER not null,
-    COMMENT_COUNT INTEGER default 0,
-    VIEW_COUNT    INTEGER default 0,
-    LIKE_COUNT    INTEGER default 0,
-    TAG           VARCHAR(256)
+    id            integer auto_increment primary key,
+    title         varchar(50),
+    description   clob,
+    gmt_create    bigint,
+    gmt_modified  bigint,
+    creator       integer not null,
+    comment_count integer default 0,
+    view_count    integer default 0,
+    like_count    integer default 0,
+    tag           varchar(256)
 );

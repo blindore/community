@@ -41,7 +41,7 @@ public class NotificationService {
         if (page < 1) page = 1;
         if (page > totalPage) page = totalPage;
         paginationDTO.setPagination(totalPage, page);
-        Integer offset = size * (page - 1);
+        Integer offset = totalPage < 1 ? 0 : size * (page - 1);
         NotificationExample example = new NotificationExample();
         example.createCriteria().andReceiverEqualTo(userId);
         example.setOrderByClause("gmt_create desc  ");

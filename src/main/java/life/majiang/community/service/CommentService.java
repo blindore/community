@@ -77,7 +77,6 @@ public class CommentService {
         }
     }
     private void createNotify(Comment comment, Integer receiver, String notifierName, String outerTitle, NotificationTypeEnum notificationType, Integer outerId) {
-
             Notification notification = new Notification();
             notification.setGmtCreate(System.currentTimeMillis());
             notification.setType(notificationType.getType());
