@@ -2214,3 +2214,41 @@
 2019-10-24 10:03:35.938 DEBUG 5412 --- [http-nio-8887-exec-5] l.m.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select ID, ACCOUNT_ID, NAME, TOKEN, GMT_CREATE, GMT_MODIFIED, BIO, AVATAR_URL from USER where ID = ? 
 2019-10-24 10:03:35.939 DEBUG 5412 --- [http-nio-8887-exec-5] l.m.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 675(Integer)
 2019-10-24 10:03:35.939 DEBUG 5412 --- [http-nio-8887-exec-5] l.m.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2019-10-24 10:08:02.408  INFO 2824 --- [main] l.m.community.CommunityApplication       : Starting CommunityApplication on PC-20160224DUOM with PID 2824 (C:\Users\Administrator\IdeaProjects\conmmunity\target\classes started by Administrator in C:\Users\Administrator\IdeaProjects\conmmunity)
+2019-10-24 10:08:02.413  INFO 2824 --- [main] l.m.community.CommunityApplication       : No active profile set, falling back to default profiles: default
+2019-10-24 10:08:04.889  INFO 2824 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8887 (http)
+2019-10-24 10:08:04.957  INFO 2824 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-10-24 10:08:04.958  INFO 2824 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.24]
+2019-10-24 10:08:05.328  INFO 2824 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-10-24 10:08:05.328  INFO 2824 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2841 ms
+2019-10-24 10:08:06.070  INFO 2824 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-10-24 10:08:06.154  INFO 2824 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-10-24 10:08:06.467  INFO 2824 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8887 (http) with context path ''
+2019-10-24 10:08:06.472  INFO 2824 --- [main] l.m.community.CommunityApplication       : Started CommunityApplication in 4.69 seconds (JVM running for 5.975)
+2019-10-24 10:08:34.258  INFO 2824 --- [http-nio-8887-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-10-24 10:08:34.259  INFO 2824 --- [http-nio-8887-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-10-24 10:08:34.269  INFO 2824 --- [http-nio-8887-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2019-10-24 10:08:34.347  INFO 2824 --- [http-nio-8887-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-10-24 10:08:34.518  INFO 2824 --- [http-nio-8887-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-10-24 10:08:34.531 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.mapper.UserMapper.selectByExample  : ==>  Preparing: select ID, ACCOUNT_ID, NAME, TOKEN, GMT_CREATE, GMT_MODIFIED, BIO, AVATAR_URL from USER WHERE ( TOKEN = ? ) 
+2019-10-24 10:08:34.563 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.mapper.UserMapper.selectByExample  : ==> Parameters: e18181e7-b6e4-4f2a-9402-ffd4cbc74b12(String)
+2019-10-24 10:08:34.581 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-10-24 10:08:34.703  WARN 2824 --- [http-nio-8887-exec-1] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [114] milliseconds.
+2019-10-24 10:08:34.713 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.m.N.countByExample                 : ==>  Preparing: select count(*) from NOTIFICATION WHERE ( RECEIVER = ? and STATUS = ? ) 
+2019-10-24 10:08:34.715 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.m.N.countByExample                 : ==> Parameters: 675(Integer), 0(Integer)
+2019-10-24 10:08:34.720 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.m.N.countByExample                 : <==      Total: 1
+2019-10-24 10:08:34.751 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.m.QuestionMapper.countByExample    : ==>  Preparing: select count(*) from QUESTION WHERE ( CREATOR = ? ) 
+2019-10-24 10:08:34.752 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.m.QuestionMapper.countByExample    : ==> Parameters: 675(Integer)
+2019-10-24 10:08:34.753 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.m.QuestionMapper.countByExample    : <==      Total: 1
+2019-10-24 10:08:34.754 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.m.Q.selectByExampleWithRowbounds   : ==>  Preparing: select ID, TITLE, GMT_CREATE, GMT_MODIFIED, CREATOR, COMMENT_COUNT, VIEW_COUNT, LIKE_COUNT, TAG from QUESTION WHERE ( CREATOR = ? ) 
+2019-10-24 10:08:34.755 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.m.Q.selectByExampleWithRowbounds   : ==> Parameters: 675(Integer)
+2019-10-24 10:08:34.757 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.m.Q.selectByExampleWithRowbounds   : <==      Total: 9
+2019-10-24 10:08:34.757 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select ID, ACCOUNT_ID, NAME, TOKEN, GMT_CREATE, GMT_MODIFIED, BIO, AVATAR_URL from USER where ID = ? 
+2019-10-24 10:08:34.758 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 675(Integer)
+2019-10-24 10:08:34.760 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2019-10-24 10:08:34.770 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select ID, ACCOUNT_ID, NAME, TOKEN, GMT_CREATE, GMT_MODIFIED, BIO, AVATAR_URL from USER where ID = ? 
+2019-10-24 10:08:34.770 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 675(Integer)
+2019-10-24 10:08:34.771 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2019-10-24 10:08:34.772 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select ID, ACCOUNT_ID, NAME, TOKEN, GMT_CREATE, GMT_MODIFIED, BIO, AVATAR_URL from USER where ID = ? 
+2019-10-24 10:08:34.772 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 675(Integer)
+2019-10-24 10:08:34.773 DEBUG 2824 --- [http-nio-8887-exec-1] l.m.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
