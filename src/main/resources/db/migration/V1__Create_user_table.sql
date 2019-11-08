@@ -9,4 +9,4 @@ create table user
     gmt_modified bigint,
     bio          varchar(256),
     avatar_url   varchar(100)
-);
+)CHARACTER SET utf8;

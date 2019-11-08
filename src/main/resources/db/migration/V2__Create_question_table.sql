@@ -10,4 +10,4 @@ create table question
     view_count    integer default 0,
     like_count    integer default 0,
     tag           varchar(256)
-);
+)CHARACTER SET utf8;

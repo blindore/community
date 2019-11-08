@@ -9,4 +9,4 @@ create table notification
     status        integer default 0 not null,
     notifier_name varchar(100),
     outer_title   varchar(256)
-);
+)CHARACTER SET utf8;

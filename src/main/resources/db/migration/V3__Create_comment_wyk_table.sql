@@ -10,4 +10,4 @@ create table comment
     like_count integer default 0,
     constraint comment_pk
         primary key (id)
-);
+)CHARACTER SET utf8;
